@@ -27,7 +27,6 @@ int main(void)
     {
         int soma_valor_pai = 0;
 	int valor_recebido = 0;
-	soma_valor_pai = 0; 
 	/*No pai, vamos LER, então vamos fechar a ESCRITA do Pipe neste lado*/
 	close(fd[1]);
 	for(int i =0; i<=MAX_TAM; i++){
