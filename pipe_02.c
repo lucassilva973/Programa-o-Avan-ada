@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define BUFFER 256
+#define MAX_TAM 10
 
 int main(void)
 {
@@ -25,21 +25,21 @@ int main(void)
     /* Processo Pai*/
     if (pid > 0)
     {
-	char str_recebida[BUFFER];
-	char str[BUFFER];
         int soma_valor_pai = 0;
 	int valor_recebido = 0;
-	soma_valor_pai = 1 + 3 + 5 + 7 + 9; 
+	soma_valor_pai = 0; 
 	/*No pai, vamos LER, então vamos fechar a ESCRITA do Pipe neste lado*/
 	close(fd[1]);
+	for(int i =0; i<=MAX_TAM; i++){
+		if(i%2 != 0)
+			soma_valor_pai += i;
+	}
 
         /* Lendo o que foi escrito no pipe */
-        read(fd[0], str_recebida, sizeof(str_recebida));
+        read(fd[0], &valor_recebido, sizeof(valor_recebido));
 	
-	printf("String lida pelo pai no pipe : '%s'\n\n",str_recebida);
+	printf("Inteiro lido pelo pai no pipe : '%d'\n\n",valor_recebido);
 	
-	valor_recebido = atoi(str_recebida);
-        
 	soma_valor_pai = soma_valor_pai + valor_recebido; 
 	
 	/* Imprimindo o Resultado na tela */
@@ -51,19 +51,19 @@ int main(void)
     else
     {
         
-	int valor_soma = 2 + 4 + 6 + 8 + 10;
-	char str_enviada[BUFFER];
+	int valor_soma = 0;
         /* No filho, vamos enviar. Então vamos fechar a entrada de leitura do pipe */
         close(fd[0]);
-	
-	sprintf(str_enviada, "%d", valor_soma);
-
         /* Escrevendo no pipe */
-        
-	write(fd[1],str_enviada,sizeof(str_enviada));
-        printf("String Escrita pelo filho no Pipe : '%s'\n\n", str_enviada);
+        for(int i =0; i<=MAX_TAM; i++){
+		if(i%2 == 0)
+			valor_soma+= i;
+	}
+	write(fd[1],&valor_soma,sizeof(valor_soma));
+        printf("Inteiro Escrito pelo filho no Pipe : '%d'\n\n", valor_soma);
         exit(0);
     }
 
     return(0);
 }
+
