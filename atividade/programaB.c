@@ -16,7 +16,7 @@ int main (){
     
     close(fd[1]);
     
-    read(fd[0],vetor,sizeof(vetor));s
+    read(fd[0],vetor,sizeof(vetor));
     
     for(int i=0; i<3; i++)
         soma+=vetor[i];
