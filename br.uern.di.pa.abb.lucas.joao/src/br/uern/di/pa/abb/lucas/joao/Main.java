@@ -7,10 +7,10 @@ public class Main {
 	Passaro p2= new Currupio(200);
 	
 	p1.cantar();
-	p1.voar(150);
+	System.out.println(p1.voar(150));
 	
 	p2.cantar();
-	p2.voar(50);
+	System.out.println(p2.voar(50));
 	
 	}
 }
