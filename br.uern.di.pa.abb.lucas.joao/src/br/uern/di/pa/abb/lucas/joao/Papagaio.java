@@ -1,7 +1,5 @@
 package br.uern.di.pa.abb.lucas.joao;
 
-import br.uern.di.pa.abb.lucas.joao.Passaro;
-
 public class Papagaio extends Passaro{
 	
 	private int distanciaDeVoo=0;
