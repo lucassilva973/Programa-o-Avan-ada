@@ -180,7 +180,7 @@ class PassaroBaseTests(TestCase):
         Atenção: Esse não é um método de teste porque não se inicia com prefixo "test".
         :param x_esperado: posição x esperada do passaro
         :param y_esperado: posição y esperada do passaro
-        :param status_esperado: status esperado do passaro
+        :param status_esperado: status esperad--o do passaro
         :param passaro: passaro alvo do teste
         :param tempo: tempo do jogo
         """

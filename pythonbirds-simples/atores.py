@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 
+import time
 import math
 
 DESTRUIDO = 'Destruido'
@@ -110,7 +111,8 @@ class Passaro(Ator):
         o status dos Passaro deve ser alterado para destruido, bem como o seu caracter
 
         """
-        pass
+        if self.y <= 0 :
+            self.status=DESTRUIDO
 
     def calcular_posicao(self, tempo):
         """
@@ -126,7 +128,12 @@ class Passaro(Ator):
         :param tempo: tempo de jogo a ser calculada a posição
         :return: posição x, y
         """
-        return 1, 1
+        
+        delta_t = tempo - self._tempo_de_lancamento 
+        while (self.y > 0):
+            self.x = self.velocidade_escalar * self._angulo_de_lancamento * delta_t
+            self.y = self.velocidade_escalar * self._angulo_de_lancamento * delta_t - (GRAVIDADE * delta_t ** 2)/2
+            return self.x, self.y
 
 
     def lancar(self, angulo, tempo_de_lancamento):
@@ -138,7 +145,10 @@ class Passaro(Ator):
         :param tempo_de_lancamento:
         :return:
         """
-        pass
+        self._angulo_de_lancamento = math.radians(angulo)
+        self._tempo_de_lancamento = tempo_de_lancamento
+        
+        
 
 
 class PassaroAmarelo(Passaro):
