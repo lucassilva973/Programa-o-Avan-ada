@@ -107,7 +107,7 @@ class AtorTestes(TestCase):
         self.assertEqual('A', ator.caracter())
         outro_ator_na_mesma_posicao = Ator()
         ator.colidir(outro_ator_na_mesma_posicao)
-        self.assertEqual('A', ator.caracter())
+        self.assertEqual(' ', ator.caracter())
 
 
     def assert_colisao_atores_ativos(self, ator, ator2, intervalo=1):
