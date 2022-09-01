@@ -129,11 +129,19 @@ class Passaro(Ator):
         :return: posição x, y
         """
         
-        delta_t = tempo - self._tempo_de_lancamento 
-        while (self.y > 0):
-            self.x = self.velocidade_escalar * self._angulo_de_lancamento * delta_t
-            self.y = self.velocidade_escalar * self._angulo_de_lancamento * delta_t - (GRAVIDADE * delta_t ** 2)/2
-            return self.x, self.y
+        delta_t = tempo - self._tempo_de_lancamento   
+        x = self._x_inicial
+        x+= self.velocidade_escalar * self._angulo_de_lancamento * delta_t
+        self.x = x
+
+
+        y = self._y_inicial
+        y += self.velocidade_escalar * delta_t * self._angulo_de_lancamento
+        y -= GRAVIDADE * (delta_t ** 2)/2
+        
+        self.y = y
+        
+        return self.x, self.y
 
 
     def lancar(self, angulo, tempo_de_lancamento):
@@ -152,8 +160,8 @@ class Passaro(Ator):
 
 
 class PassaroAmarelo(Passaro):
-    pass
+    velocidade_escalar = 30
 
 
 class PassaroVermelho(Passaro):
-    pass
+    velocidade_escalar = 20
